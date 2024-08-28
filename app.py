@@ -21,7 +21,7 @@ def get_mongo_collections():
 
 records, payments = get_mongo_collections()
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/index", methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         return jsonify({"message": "POST request successful"})
