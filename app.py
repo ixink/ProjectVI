@@ -11,7 +11,7 @@ app.secret_key = os.getenv("SECRET_KEY", "default-secret-key")
 CORS(app)
 
 
-@app.route("/index", methods=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST'])
 def index():
      if request.method == 'POST':
           return jsonify({"message": "POST request successful"})
