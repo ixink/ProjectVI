@@ -1,4 +1,4 @@
-from flask import Flask, request, session, redirect, jsonify,render_template
+from flask import Flask, request, session, redirect, jsonify, render_template
 from datetime import datetime, timedelta
 import os
 import pymongo
@@ -10,15 +10,6 @@ app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "default-secret-key")
 CORS(app)
 
-
-@app.route("/", methods=['GET', 'POST'])
-def index():
-     if request.method == 'POST':
-          return jsonify({"message": "POST request successful"})
-
-        return render_template("index.html")
-
-
 # Stripe API setup
 stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
 
@@ -29,6 +20,12 @@ def get_mongo_collections():
     return db['register'], db['payments']
 
 records, payments = get_mongo_collections()
+
+@app.route("/", methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        return jsonify({"message": "POST request successful"})
+    return render_template("index.html")  # This line was incorrectly indented before
 
 @app.route("/register", methods=['POST'])
 def register():
